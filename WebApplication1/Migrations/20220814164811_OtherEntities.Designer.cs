@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Migrations
 {
     [DbContext(typeof(SalesWebMvcContext))]
-    partial class SalesWebMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20220814164811_OtherEntities")]
+    partial class OtherEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,20 +40,20 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int?>("SellerId");
+                    b.Property<int?>("Sellerid");
 
                     b.Property<int>("Status");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("Sellerid");
 
                     b.ToTable("SalesRecord");
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.Seller", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("BaseSalary");
@@ -64,7 +66,7 @@ namespace SalesWebMvc.Migrations
 
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("DepartmentId");
 
@@ -75,7 +77,7 @@ namespace SalesWebMvc.Migrations
                 {
                     b.HasOne("SalesWebMvc.Models.Seller", "Seller")
                         .WithMany("Sales")
-                        .HasForeignKey("SellerId");
+                        .HasForeignKey("Sellerid");
                 });
 
             modelBuilder.Entity("SalesWebMvc.Models.Seller", b =>
